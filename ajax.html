@@ -1,0 +1,15 @@
+<body>
+   <div id="result1"></div> 
+</body>
+<script>
+function details(data){
+  result.innerHTML = JSON.stringify(data,0,4);
+}
+
+fetch('https://jsonplaceholder.typicode.com/comments')
+.then(response => response.json())
+.then(details);
+
+
+</script>
+

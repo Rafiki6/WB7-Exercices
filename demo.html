@@ -1,0 +1,10 @@
+<body>
+    <div id="output">Result</div>
+</body>
+<script>
+    fetch('https://pokeapi.co/api/v2/pokemon')
+    .then(response => response.json())
+    .then(json =>{
+        output.innerHTML = JSON.stringify(json,0,4)
+    })
+</script>

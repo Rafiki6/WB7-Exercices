@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="target"></div>
+    <div id="output"></div>
+    
+</body>
+<script>
+
+    const uri = "https://pokeapi.co/api/v2/pokemon"
+
+    function details(uri){
+        const target = document.getElementById("target")
+        fetch(uri)
+        .then(r => r.json())
+        .then(s => {
+            target.innerHTML = `<img src ="${s.sprites.front_default}"alt ="${s.name}">`;
+        });
+    }
+    function row(item){
+        return `<tr> 
+                    <td>
+                        <button onclick ="details('${item.url}')">${item.name}
+                        </button>
+                    </td>
+                </tr>`;
+    }
+
+   
+
+    const data = (d => {
+        const output = document.getElementById("output")
+        const table = document.createElement("table")
+        table.innerHTML = d.results.map(row).join("");
+        output.appendChild(table);
+    });
+    
+    fetch(uri)
+    .then(r => r.json())
+    .then(data);
+</script>
+</html>
