@@ -1,0 +1,50 @@
+<body>
+    <select name="nameList" id="nameList">
+        <option>--Select Name--</option>
+    </select>
+    <h1>Details</h1>
+    <table id="grid" border="1">
+   
+        
+    </table>
+</body>
+<script>
+   
+    const nameList = document.getElementById("nameList");
+
+    function drawTable(p) {
+        grid.innerHTML +=
+            `
+            <tr><td>Name </td> <td> ${p.name}</td></tr>
+            <tr><td>ID </td><td>${p.id}</td></tr>
+            <tr><td>UserName </td><td>${p.username}</td></tr>
+            <tr><td>Email </td><td>${p.email}</td></tr>
+            <tr><td>Phone </td><td>${p.phone}</td></tr>
+            <tr><td>Website </td> <td>${p.website}</td></tr>
+        
+        `
+    }
+    const url = "https://jsonplaceholder.typicode.com/users";
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(item => {
+
+                const option = document.createElement("option");
+                option.value = item.name;
+                option.innerText = item.name;
+                nameList.appendChild(option);
+            });
+
+            nameList.addEventListener("change", e => {
+               // console.log("change")
+                const selectName = data.find(item => nameList.value == item.name);
+                if(selectName){
+                    drawTable(selectName)
+                }else{
+                    grid.innerHTML ="Select Name from the list";
+                }
+
+            })
+        })
+</script>
